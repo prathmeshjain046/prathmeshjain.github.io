@@ -404,6 +404,62 @@
             </div>
           </article>
 
+          <article class="proj-card proj-featured proj-zuuby reveal" style="--d:2" id="zuuby-card">
+  <div class="proj-number">03</div>
+  <div class="proj-content">
+    <div class="proj-top">
+      <div>
+        <h3 class="proj-title">Zuuby</h3>
+        <p class="proj-sub">Multi-AI Chrome Extension</p>
+      </div>
+      <a href="https://chromewebstore.google.com" target="_blank" rel="noopener" class="proj-gh" title="Chrome Web Store">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.93 0 3.68.72 5.01 1.9L12 12V6zm-1 6.73L5.99 7.9A7.94 7.94 0 0 0 4 12c0 3.73 2.56 6.86 6 7.75V13l1-4.27zM12 20c-1.93 0-3.68-.72-5.01-1.9l5.01-4.1 5.01 4.1C15.68 19.28 13.93 20 12 20zm1-7.27V19.75c3.44-.89 6-4.02 6-7.75 0-1.58-.46-3.05-1.25-4.29L13 12.73z"/>
+        </svg>
+      </a>
+    </div>
+
+    <p class="proj-desc">Floating AI chatbot that works on every webpage. Supports 5 providers — Gemini, Groq, Mistral, Cohere & OpenAI — with automatic fallback when quota runs out. Built with Chrome MV3, OAuth 2.0 Google Sign-In, and a draggable UI.</p>
+
+    <!-- Interactive mini demo -->
+    <div class="zuuby-demo" id="zuubyDemo">
+      <div class="zuuby-demo-bar">
+        <div class="zuuby-demo-dot"></div>
+        <div class="zuuby-demo-dot"></div>
+        <div class="zuuby-demo-dot"></div>
+        <span class="zuuby-demo-label">Live preview · click a provider</span>
+      </div>
+      <div class="zuuby-providers">
+        <button class="zp-pill active" data-id="gemini">🔵 Gemini</button>
+        <button class="zp-pill" data-id="groq">🟠 Groq</button>
+        <button class="zp-pill" data-id="mistral">🔴 Mistral</button>
+        <button class="zp-pill" data-id="cohere">🟣 Cohere</button>
+      </div>
+      <div class="zuuby-chat-line" id="zuubyChatLine">
+        <span class="zcl-tag user">You</span>
+        <span id="zuubyText">Click a provider to see auto-fallback in action</span>
+      </div>
+      <div class="zuuby-fallback-toast" id="zuubyToast"></div>
+    </div>
+
+    <div class="proj-highlights">
+      <div class="ph-item">
+        <span class="ph-val">5</span>
+        <span class="ph-label">AI providers with auto-fallback</span>
+      </div>
+      <div class="ph-item">
+        <span class="ph-val">MV3</span>
+        <span class="ph-label">Chrome Manifest v3 architecture</span>
+      </div>
+    </div>
+
+    <div class="proj-stack">
+      <span>Vanilla JS</span><span>Chrome Extension API</span><span>Gemini</span>
+      <span>Groq</span><span>OpenAI API</span><span>OAuth 2.0</span><span>CSS3</span>
+    </div>
+  </div>
+</article>
+          
         </div>
       </div>
     </section>
