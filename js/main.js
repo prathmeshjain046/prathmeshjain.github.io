@@ -175,3 +175,82 @@ document.querySelectorAll('.hero-card, .proj-card').forEach(card => {
     card.style.transform = '';
   });
 });
+
+// ── Zuuby interactive demo ──
+(function () {
+  const DEMOS = {
+    gemini:  { reply: 'Sure! Gemini here — how can I help?' },
+    groq:    { reply: 'Groq (Llama 3.1) responding — super fast!' },
+    mistral: { reply: 'Mistral AI at your service.' },
+    cohere:  { reply: 'Cohere Command-R ready to assist.' },
+  };
+
+  const pills    = document.querySelectorAll('.zp-pill');
+  const chatLine = document.getElementById('zuubyChatLine');
+  const toast    = document.getElementById('zuubyToast');
+  const card     = document.getElementById('zuuby-card');
+  if (!pills.length || !card) return;
+
+  let active = 'gemini', typing = false, cycleTimer = null;
+
+  function setActive(id) {
+    pills.forEach(p => p.classList.toggle('active', p.dataset.id === id));
+  }
+
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
+  function runDemo(id) {
+    if (typing) return;
+    const prev = active;
+    active = id;
+    typing = true;
+
+    chatLine.innerHTML = `<span class="zcl-tag user">You</span><span>Summarise this page for me</span>`;
+
+    setTimeout(() => {
+      chatLine.innerHTML = `
+        <span class="zcl-tag">${id[0].toUpperCase() + id.slice(1)}</span>
+        <span class="zuuby-typing"><span></span><span></span><span></span></span>`;
+
+      if (prev !== id) {
+        const p = prev[0].toUpperCase() + prev.slice(1);
+        const n = id[0].toUpperCase()   + id.slice(1);
+        setTimeout(() => showToast(`⚡ Auto-switched: ${p} → ${n}`), 300);
+      }
+
+      setTimeout(() => {
+        chatLine.innerHTML = `
+          <span class="zcl-tag">${id[0].toUpperCase() + id.slice(1)}</span>
+          <span>${DEMOS[id].reply}</span>`;
+        typing = false;
+      }, 1100);
+    }, 400);
+  }
+
+  pills.forEach(p => p.addEventListener('click', () => {
+    stopCycle();
+    setActive(p.dataset.id);
+    runDemo(p.dataset.id);
+  }));
+
+  const providerOrder = ['gemini', 'groq', 'mistral', 'cohere'];
+  let cycleIdx = 0;
+
+  function startCycle() {
+    cycleTimer = setInterval(() => {
+      cycleIdx = (cycleIdx + 1) % providerOrder.length;
+      const id = providerOrder[cycleIdx];
+      setActive(id);
+      runDemo(id);
+    }, 3200);
+  }
+  function stopCycle() { clearInterval(cycleTimer); }
+
+  new IntersectionObserver(entries => {
+    entries[0].isIntersecting ? startCycle() : stopCycle();
+  }, { threshold: 0.5 }).observe(card);
+})();
